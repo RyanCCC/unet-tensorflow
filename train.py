@@ -3,7 +3,7 @@ from tensorflow.keras.callbacks import (EarlyStopping, ModelCheckpoint, ReduceLR
                              TensorBoard)
 from tensorflow.keras.optimizers import Adam
 from nets.unet import Unet
-from nets.loss import CE, dice_loss_with_CE
+from nets.loss import CE, dice_loss_with_CE, Focal_Loss, dice_loss_with_Focal_Loss
 from utils.metrics import Iou_score, f_score
 from utils.dataloader import UnetDatasetGenerator
 import tensorflow as tf
@@ -56,7 +56,7 @@ if __name__ == "__main__":
                 metrics = [f_score()])
 
         gen             = UnetDatasetGenerator(Batch_size, train_lines, inputs_size, num_classes, dataset_path).generate()
-        gen_val         = UnetDatasetGenerator(Batch_size, val_lines, inputs_size, num_classes, dataset_path).generate(False)
+        gen_val         = UnetDatasetGenerator(Batch_size, val_lines, inputs_size, num_classes, dataset_path).generate()
 
         epoch_size      = len(train_lines) // Batch_size
         epoch_size_val  = len(val_lines) // Batch_size
