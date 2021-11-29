@@ -3,8 +3,9 @@ from tensorflow.keras.callbacks import (EarlyStopping, ModelCheckpoint, ReduceLR
                              TensorBoard)
 from tensorflow.keras.optimizers import Adam
 from nets.unet import Unet
-from nets.unet_training import CE, Generator, LossHistory, dice_loss_with_CE
+from nets.loss import CE, dice_loss_with_CE
 from utils.metrics import Iou_score, f_score
+from utils.dataloader import UnetDatasetGenerator
 import tensorflow as tf
 import configparser
 
@@ -22,13 +23,6 @@ if __name__ == "__main__":
     inputs_size = [img_size,img_size,3]
     #分类个数
     num_classes = config.getint('default','num_class')
-    '''
-    建议选项：
-    种类少（几类）时，设置为True
-    种类多（十几类）时，如果batch_size比较大（10以上），那么设置为True
-    种类多（十几类）时，如果batch_size比较小（10以下），那么设置为False
-    '''
-
     dice_loss = config.getboolean('train', 'dice_loss')
     dataset_path = config.get('default', 'dataset_path')
     # 获取model
@@ -40,14 +34,6 @@ if __name__ == "__main__":
         train_lines = f.readlines()
     with open(os.path.join(dataset_path, "val.txt"),"r") as f:
         val_lines = f.readlines()
-
-    '''
-    训练参数的设置
-    logging表示tensorboard的保存地址
-    checkpoint用于设置权值保存的细节，period用于修改多少epoch保存一次
-    reduce_lr用于设置学习率下降的方式
-    early_stopping用于设定早停，val_loss多次不下降自动结束训练，表示模型基本收敛
-    '''
 
     checkpointPath = log_dir + 'tmp.h5'
     checkpoint_period = ModelCheckpoint(checkpointPath,
@@ -69,8 +55,8 @@ if __name__ == "__main__":
                 optimizer = Adam(lr=lr),
                 metrics = [f_score()])
 
-        gen             = Generator(Batch_size, train_lines, inputs_size, num_classes, dataset_path).generate()
-        gen_val         = Generator(Batch_size, val_lines, inputs_size, num_classes, dataset_path).generate(False)
+        gen             = UnetDatasetGenerator(Batch_size, train_lines, inputs_size, num_classes, dataset_path).generate()
+        gen_val         = UnetDatasetGenerator(Batch_size, val_lines, inputs_size, num_classes, dataset_path).generate(False)
 
         epoch_size      = len(train_lines) // Batch_size
         epoch_size_val  = len(val_lines) // Batch_size
@@ -101,8 +87,8 @@ if __name__ == "__main__":
                 optimizer = Adam(lr=lr),
                 metrics = [f_score()])
 
-        gen             = Generator(Batch_size, train_lines, inputs_size, num_classes, dataset_path).generate()
-        gen_val         = Generator(Batch_size, val_lines, inputs_size, num_classes, dataset_path).generate(False)
+        gen             = UnetDatasetGenerator(Batch_size, train_lines, inputs_size, num_classes, dataset_path).generate()
+        gen_val         = UnetDatasetGenerator(Batch_size, val_lines, inputs_size, num_classes, dataset_path).generate(False)
         
         epoch_size      = len(train_lines) // Batch_size
         epoch_size_val  = len(val_lines) // Batch_size
