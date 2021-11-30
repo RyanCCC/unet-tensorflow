@@ -43,6 +43,9 @@ def rand(a=0, b=1):
 
 
 def Focal_Loss(alpha=0.5, gamma=2):
+    '''
+    y_pred：用one-hot的方式表示，如两类别，则输出的维度为[batch_size, width, height, class_num]
+    '''
     def Focal_Loss_fn(y_true, y_pred):
         y_pred = K.clip(y_pred, K.epsilon(), 1.0-K.epsilon())
         logpt = - y_true[...,:-1] * K.log(y_pred)
