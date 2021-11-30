@@ -50,7 +50,7 @@ if __name__ == "__main__":
         Init_Epoch      = config.getint('train', 'Init_Epoch')
         Freeze_Epoch    = config.getint('train', 'Freeze_Epoch')
         Batch_size      = config.getint('train', 'Batch_size')
-
+        # 可以使用focal loss的损失
         model.compile(loss = dice_loss_with_CE() if dice_loss else CE(),
                 optimizer = Adam(lr=lr),
                 metrics = [f_score()])
@@ -82,7 +82,7 @@ if __name__ == "__main__":
         Freeze_Epoch    = config.getint('train', 'Freeze_Epoch')
         Unfreeze_Epoch  = config.getint('train', 'Unfreeze_Epoch')
         Batch_size      = config.getint('train', 'Batch_size')
-
+        # 可以使用focal loss的损失
         model.compile(loss = dice_loss_with_CE() if dice_loss else CE(),
                 optimizer = Adam(lr=lr),
                 metrics = [f_score()])
