@@ -29,7 +29,7 @@
 
 ## 数据集
 
-如何根据自己的任务制作训练数据，请查看我的博客：https://editor.csdn.net/md/?articleId=120370578； 代码详情请查看我的repo：https://github.com/RyanCCC/Semantic-Segmentation-Datasets
+如何根据自己的任务制作训练数据，请查看我的博客：https://blog.csdn.net/u012655441/article/details/120370578 。 代码详情请查看我的repo：https://github.com/RyanCCC/Semantic-Segmentation-Datasets
 
 ## 训练
 通过```pip install -r requiremetstxt```安装好相关的依赖以及修改好配置文件后，执行下面命令进行训练：
