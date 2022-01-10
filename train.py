@@ -55,8 +55,8 @@ if __name__ == "__main__":
                 optimizer = Adam(lr=lr),
                 metrics = [f_score()])
 
-        gen             = UnetDatasetGenerator(Batch_size, train_lines, inputs_size, num_classes, dataset_path).generate()
-        gen_val         = UnetDatasetGenerator(Batch_size, val_lines, inputs_size, num_classes, dataset_path).generate()
+        gen             = UnetDatasetGenerator(Batch_size, train_lines, inputs_size, num_classes, dataset_path)()
+        gen_val         = UnetDatasetGenerator(Batch_size, val_lines, inputs_size, num_classes, dataset_path)()
 
         epoch_size      = len(train_lines) // Batch_size
         epoch_size_val  = len(val_lines) // Batch_size

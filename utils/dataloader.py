@@ -15,7 +15,7 @@ class UnetDatasetGenerator(object):
         self.dataset_path   = dataset_path
 
         
-    def generate(self):
+    def __call__(self):
         i = 0
         length = len(self.train_lines)
         inputs = []
