@@ -10,10 +10,6 @@ import onnx
 import onnxruntime
 
 class Unet(object):
-
-    #---------------------------------------------------#
-    #   初始化UNET
-    #---------------------------------------------------#
     def __init__(self, **kwargs):
         _defaults = {
             "model_path"        : kwargs['model'],
@@ -25,11 +21,7 @@ class Unet(object):
         self.generate()
 
     def generate(self):
-        #-------------------------------#
-        #   载入模型与权值
-        #-------------------------------#
         self.model = unet(self.model_image_size, self.num_classes)
-
         self.model.load_weights(self.model_path)
         print('{} model loaded.'.format(self.model_path))
 
