@@ -1,13 +1,12 @@
 import colorsys
 import copy
 import time
-
+import onnx
 import numpy as np
 from PIL import Image
 
 from nets.unet import Unet as unet
-import onnx
-import onnxruntime
+import keras2onnx
 
 class Unet(object):
     def __init__(self, **kwargs):
@@ -20,10 +19,13 @@ class Unet(object):
         self.__dict__.update(_defaults)
         self.generate()
 
-    def generate(self):
+    def generate(self,export_onnx=True):
         self.model = unet(self.model_image_size, self.num_classes)
         self.model.load_weights(self.model_path)
         print('{} model loaded.'.format(self.model_path))
+        if export_onnx:
+            onnx_model = keras2onnx.convert_keras(self.model, self.model.name)
+            onnx.save_model(onnx_model, self.onnx_model)
 
         if self.num_classes <= 21:
             self.colors = [
