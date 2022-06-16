@@ -1,6 +1,6 @@
 # Unet-tensorflow
 
-本项目是基于Tensorflow2.4.0版本实现Unet算法，Unet网络结构比较简单，使用与一些数据量比较少的任务，如医学图像、工业残次品检测等。具体的Unet介绍以及应用实例可参考我的一篇博客：[地物分类：基于Unet的建筑物轮廓识别](https://blog.csdn.net/u012655441/article/details/120373759)。
+Unet网络结构比较简单，适用与一些数据量比较少的任务，如医学图像、工业残次品检测等。具体的Unet介绍以及应用实例可参考我的一篇博客：[地物分类：基于Unet的建筑物轮廓识别](https://blog.csdn.net/u012655441/article/details/120373759)。
 
 ## 文件结构
 
@@ -29,13 +29,15 @@
 
 ## 数据集
 
-如何根据自己的任务制作训练数据，请查看我的博客：https://blog.csdn.net/u012655441/article/details/120370578 。 代码详情请查看我的repo：https://github.com/RyanCCC/Semantic-Segmentation-Datasets
+如何根据自己的任务制作训练数据，请查看我的博客：[图像分割数据集制作](https://blog.csdn.net/u012655441/article/details/120370578) ，对应代码可查看：[mantic-Segmentation-Datasets](https://github.com/RyanCCC/Semantic-Segmentation-Datasets)
 
 ## 训练
 通过```pip install -r requiremetstxt```安装好相关的依赖以及修改好配置文件后，执行下面命令进行训练：
 ```sh
 python train.py
 ```
+
+当然也可以在命令行使用参数形式运行，本人比较习惯在windows环境下进行调试测试通过后再搬到服务器上进行训练。
 
 ## 推理
 
