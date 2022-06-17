@@ -1,11 +1,12 @@
 import colorsys
 import copy
 import time
-import onnx
 import numpy as np
 from PIL import Image
-
 from nets.unet import Unet as unet
+import os
+os.environ['TF_KERAS']='1'
+import onnx
 import keras2onnx
 
 class Unet(object):
@@ -19,7 +20,7 @@ class Unet(object):
         self.__dict__.update(_defaults)
         self.generate()
 
-    def generate(self,export_onnx=True):
+    def generate(self,export_onnx=False):
         self.model = unet(self.model_image_size, self.num_classes)
         self.model.load_weights(self.model_path)
         print('{} model loaded.'.format(self.model_path))

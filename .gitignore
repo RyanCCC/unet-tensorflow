@@ -132,3 +132,5 @@ dmypy.json
 .history
 unet_config.cfg
 logs/*
+
+*.onnx

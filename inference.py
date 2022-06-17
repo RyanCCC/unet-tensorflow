@@ -58,7 +58,7 @@ if __name__ == "__main__":
     mode = config.get('predict', 'mode')
 
 
-    if mode == "predict":
+    if mode == "predict": 
         for img in tqdm(glob(config.get('predict', 'test_path')+'*')):
             print(img)
         # img = config.get('predict', 'test_path')+config.get('predict', 'test_img')
